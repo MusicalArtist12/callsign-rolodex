@@ -252,7 +252,7 @@ export default function Rolodex() {
             .sort(SORTS[sort].impl)
             .filter((c) => {
               if (query) {
-                const queries: string[] = query.split(',');
+                const queries: string[] = query.split(' ');
                 let result: boolean = true;
                 for (let n in queries) {
                   const q = queries[n].toLocaleLowerCase().trim();
@@ -264,7 +264,6 @@ export default function Rolodex() {
                     c.cardType.toLocaleLowerCase().includes(q)
                   );
                 }
-
                 return result;
               }
 
