@@ -254,10 +254,8 @@ export default function Rolodex() {
               if (query) {
                 const queries: string[] = query.split(',');
                 let result: boolean = true;
-                console.log(queries)
                 for (let n in queries) {
                   const q = queries[n].toLocaleLowerCase().trim();
-                  console.log(q);
                   result = result && (
                     c.callsign.toLocaleLowerCase().includes(q) ||
                     c.name.toLocaleLowerCase().includes(q) ||
