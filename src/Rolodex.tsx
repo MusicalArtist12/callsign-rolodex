@@ -252,15 +252,22 @@ export default function Rolodex() {
             .sort(SORTS[sort].impl)
             .filter((c) => {
               if (query) {
-                const q = query.toLocaleLowerCase();
-                return (
-                  c.callsign.toLocaleLowerCase().includes(q) ||
-                  c.name.toLocaleLowerCase().includes(q) ||
-                  // this may cause issues with older cards that may have an undefined location...
-                  c.location.toLocaleLowerCase().includes(q) || 
-                  c.cardType.toLocaleLowerCase().includes(q)
-                );
-              
+                const queries: string[] = query.split(',');
+                let result: boolean = true;
+                console.log(queries)
+                for (let n in queries) {
+                  const q = queries[n].toLocaleLowerCase().trim();
+                  console.log(q);
+                  result = result && (
+                    c.callsign.toLocaleLowerCase().includes(q) ||
+                    c.name.toLocaleLowerCase().includes(q) ||
+                    // this may cause issues with older cards that may have an undefined location...
+                    c.location.toLocaleLowerCase().includes(q) || 
+                    c.cardType.toLocaleLowerCase().includes(q)
+                  );
+                }
+
+                return result;
               }
 
               return true;
